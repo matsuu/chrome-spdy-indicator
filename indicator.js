@@ -47,9 +47,13 @@ chrome.runtime.onMessage.addListener(function (res, sender) {
       , tabId: tab.id
     });
 
+    // https://gist.github.com/jlong/2428561
+    var parser = document.createElement('a');
+    parser.href = tab.url;
+
     // change icon tooltip
     chrome.pageAction.setTitle({
-        title: tab.url + ' is ' + tooltip + '-enabled' + (res.spdy ? '(' + res.info + ')' : '')
+        title: parser.origin + ' is ' + tooltip + '-enabled' + (res.spdy ? '(' + res.info + ')' : '')
       , tabId: tab.id
     });
 
